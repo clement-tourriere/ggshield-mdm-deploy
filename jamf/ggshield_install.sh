@@ -1,0 +1,1 @@
+../shared/ggshield_install.sh
