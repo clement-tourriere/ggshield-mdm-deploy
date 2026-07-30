@@ -27,9 +27,24 @@ Symlink to [`../shared/ggshield_install.sh`](../shared/ggshield_install.sh). Cus
 3. Confirms the package is notarized by Apple
 4. Installs the package and verifies the installed binary signature
 
+### `ggshield_configure_eu.sh`
+
+Symlink to [`../shared/ggshield_configure_eu.sh`](../shared/ggshield_configure_eu.sh). Custom
+Script that points ggshield at GitGuardian's EU-hosted dashboard
+(`https://dashboard.eu1.gitguardian.com`) for the logged-in console user. No editing required.
+
+### `ggshield_configure_self_hosted.sh`
+
+Symlink to
+[`../shared/ggshield_configure_self_hosted.sh`](../shared/ggshield_configure_self_hosted.sh).
+Custom Script that points ggshield at a self-hosted GitGuardian instance for the logged-in console
+user. Edit the `INSTANCE_URL` variable at the top of the script before uploading.
+
 ## Kandji Setup
 
 1. Create a **Custom Script** library item
 2. Set `ggshield_audit.sh` as the **Audit Script**
 3. Set `ggshield_remediation.sh` as the **Remediation Script**
 4. Assign to the appropriate Blueprint(s)
+5. If you're on the EU or a self-hosted instance, create a separate **Custom Script** library item
+   running `ggshield_configure_eu.sh` or `ggshield_configure_self_hosted.sh` (edited with your URL)
