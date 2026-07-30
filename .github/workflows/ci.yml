@@ -13,5 +13,7 @@ jobs:
       - uses: jdx/mise-action@v4
       - name: Lint (shellcheck, shfmt)
         run: hk check --all
+      - name: Lint (markdown)
+        run: dprint check
       - name: Test
         run: bats test/
