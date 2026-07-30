@@ -2,3 +2,11 @@
 shellcheck = "latest"
 shfmt = "latest"
 bats = "latest"
+hk = "latest"
+pkl = "latest"
+
+[env]
+HK_MISE = 1
+
+[hooks]
+postinstall = "hk install --mise"
