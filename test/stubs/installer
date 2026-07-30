@@ -1,0 +1,22 @@
+#!/bin/bash
+# Stub installer for tests. Behavior is controlled by env vars set per-test:
+#   STUB_INSTALLER_EXIT     exit code to return (default 0 = success)
+#   STUB_INSTALLED_VERSION  version the fake installed ggshield binary reports
+#   GGSHIELD_PATH           where to write the fake installed binary
+
+if [[ -n "$STUB_INSTALLER_EXIT" && "$STUB_INSTALLER_EXIT" != "0" ]]; then
+	echo "installer: Package failed" >&2
+	exit "$STUB_INSTALLER_EXIT"
+fi
+
+target="${GGSHIELD_PATH:-/usr/local/bin/ggshield}"
+mkdir -p "$(dirname "$target")"
+cat >"$target" <<EOF
+#!/bin/bash
+echo "ggshield, version ${STUB_INSTALLED_VERSION:-1.35.0}"
+EOF
+chmod +x "$target"
+
+echo "installer: Package name is ggshield"
+echo "installer: The install was successful."
+exit 0

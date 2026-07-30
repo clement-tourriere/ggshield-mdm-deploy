@@ -1,0 +1,9 @@
+#!/bin/bash
+# Stub uname for tests. Behavior is controlled by env vars set per-test:
+#   STUB_ARCH   value to report for `uname -m` (default arm64)
+
+if [[ "$1" == "-m" ]]; then
+	echo "${STUB_ARCH:-arm64}"
+	exit 0
+fi
+exit 1
