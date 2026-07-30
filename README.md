@@ -6,10 +6,10 @@ Inspired by [Installomator](https://github.com/Installomator/Installomator).
 
 ## Supported MDM Platforms
 
-| Platform | Directory | Description |
-|----------|-----------|-------------|
+| Platform          | Directory | Description                                           |
+| ----------------- | --------- | ----------------------------------------------------- |
 | [Kandji](kandji/) | `kandji/` | Audit & remediation scripts for Kandji Custom Scripts |
-| [Jamf Pro](jamf/) | `jamf/` | Install script and Extension Attribute for Jamf Pro |
+| [Jamf Pro](jamf/) | `jamf/`   | Install script and Extension Attribute for Jamf Pro   |
 
 ## Structure
 
