@@ -28,6 +28,11 @@ if [[ -z "$INSTANCE_URL" ]]; then
 	exit 1
 fi
 
+if [[ "$INSTANCE_URL" != https://* ]]; then
+	log "ERROR" "INSTANCE_URL '$INSTANCE_URL' does not look like a URL (expected it to start with https://)."
+	exit 1
+fi
+
 if [[ ! -x "$GGSHIELD_PATH" ]]; then
 	log "ERROR" "ggshield is not installed at $GGSHIELD_PATH."
 	exit 1
