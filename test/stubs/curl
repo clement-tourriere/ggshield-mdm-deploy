@@ -1,0 +1,51 @@
+#!/bin/bash
+# Stub curl for tests. Behavior is controlled by env vars set per-test:
+#   STUB_LATEST_VERSION   version reported by the "latest release" redirect
+#   STUB_CURL_LATEST_FAIL  set to skip the Location header (simulates lookup failure)
+#   STUB_API_FAIL          set to fail the GitHub API call (simulates 404/rate-limit)
+#   STUB_DOWNLOAD_FAIL     set to fail the package download
+
+args=("$@")
+joined=" ${args[*]} "
+
+has_flag() {
+	for a in "${args[@]}"; do
+		[[ "$a" == "$1" ]] && return 0
+	done
+	return 1
+}
+
+if has_flag "-sLI"; then
+	if [[ -n "$STUB_CURL_LATEST_FAIL" ]]; then
+		exit 0
+	fi
+	version="${STUB_LATEST_VERSION:-1.35.0}"
+	printf 'HTTP/2 302\r\nlocation: https://github.com/GitGuardian/ggshield/releases/tag/v%s\r\n\r\n' "$version"
+	exit 0
+fi
+
+if [[ "$joined" == *api.github.com* ]]; then
+	if [[ -n "$STUB_API_FAIL" ]]; then
+		exit 22
+	fi
+	version="${STUB_LATEST_VERSION:-1.35.0}"
+	printf '{"assets":[{"browser_download_url":"https://github.com/GitGuardian/ggshield/releases/download/v%s/ggshield-%s-arm64-apple-darwin.pkg"},{"browser_download_url":"https://github.com/GitGuardian/ggshield/releases/download/v%s/ggshield-%s-x86_64-apple-darwin.pkg"}]}' \
+		"$version" "$version" "$version" "$version"
+	exit 0
+fi
+
+if has_flag "-o"; then
+	outfile=""
+	for i in "${!args[@]}"; do
+		if [[ "${args[$i]}" == "-o" ]]; then
+			outfile="${args[$((i + 1))]}"
+		fi
+	done
+	if [[ -n "$STUB_DOWNLOAD_FAIL" ]]; then
+		exit 22
+	fi
+	printf 'fake-pkg-content' >"$outfile"
+	exit 0
+fi
+
+exit 1

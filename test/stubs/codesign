@@ -1,0 +1,12 @@
+#!/bin/bash
+# Stub codesign for tests. Behavior is controlled by env vars set per-test:
+#   STUB_CODESIGN_TEAMID   team ID reported in the TeamIdentifier= line
+
+teamid="${STUB_CODESIGN_TEAMID:-N67C7J5WQ9}"
+cat >&2 <<EOF
+Executable=${*}
+Identifier=com.gitguardian.ggshield
+Authority=Developer ID Application: GitGuardian Inc. ($teamid)
+TeamIdentifier=$teamid
+EOF
+exit 0

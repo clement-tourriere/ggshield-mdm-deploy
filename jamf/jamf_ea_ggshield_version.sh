@@ -5,7 +5,7 @@
 # Data Type: String
 # Input Type: Script
 
-GGSHIELD_PATH="/usr/local/bin/ggshield"
+GGSHIELD_PATH="${GGSHIELD_PATH:-/usr/local/bin/ggshield}"
 
 if [[ ! -x "$GGSHIELD_PATH" ]]; then
 	echo "<result>Not installed</result>"

@@ -9,12 +9,15 @@
 # validates the Team ID matches GitGuardian before installation.
 # Inspired by Installomator (https://github.com/Installomator/Installomator)
 
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin
+# _TEST_PATH_OVERRIDE is read only by the test suite; production runs always
+# get the hardcoded value below.
+export PATH="${_TEST_PATH_OVERRIDE:-/usr/bin:/bin:/usr/sbin:/sbin}"
 
 # --- Configuration ---
 GIT_USER="GitGuardian"
 GIT_REPO="ggshield"
 EXPECTED_TEAM_ID="N67C7J5WQ9" # GitGuardian Inc.
+GGSHIELD_PATH="${GGSHIELD_PATH:-/usr/local/bin/ggshield}"
 TEMP_DIR=$(mktemp -d)
 
 # --- Functions ---
@@ -112,15 +115,15 @@ fi
 log "INFO" "$installerOut"
 
 # --- Verify installation and binary signature ---
-if [[ ! -x "/usr/local/bin/ggshield" ]]; then
+if [[ ! -x "$GGSHIELD_PATH" ]]; then
 	log "ERROR" "ggshield binary not found after installation."
 	exit 1
 fi
 
-installedVersion=$(/usr/local/bin/ggshield --version 2>/dev/null | sed 's/[^0-9.]//g')
+installedVersion=$("$GGSHIELD_PATH" --version 2>/dev/null | sed 's/[^0-9.]//g')
 
 # Verify the installed binary is also signed by the expected team
-binaryTeamID=$(codesign -dv /usr/local/bin/ggshield 2>&1 | awk -F= '/TeamIdentifier/ {print $2}')
+binaryTeamID=$(codesign -dv "$GGSHIELD_PATH" 2>&1 | awk -F= '/TeamIdentifier/ {print $2}')
 if [[ "$binaryTeamID" != "$EXPECTED_TEAM_ID" ]]; then
 	log "ERROR" "Installed binary Team ID mismatch! Got '$binaryTeamID', expected '$EXPECTED_TEAM_ID'."
 	exit 1

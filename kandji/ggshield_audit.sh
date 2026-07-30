@@ -7,10 +7,12 @@
 #
 # Inspired by Installomator (https://github.com/Installomator/Installomator)
 
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+# _TEST_PATH_OVERRIDE is read only by the test suite; production runs always
+# get the hardcoded value below.
+export PATH="${_TEST_PATH_OVERRIDE:-/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin}"
 
 # --- Configuration ---
-GGSHIELD_PATH="/usr/local/bin/ggshield"
+GGSHIELD_PATH="${GGSHIELD_PATH:-/usr/local/bin/ggshield}"
 EXPECTED_TEAM_ID="N67C7J5WQ9" # GitGuardian Inc.
 
 # --- Check if ggshield is installed ---

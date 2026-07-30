@@ -1,0 +1,17 @@
+#!/bin/bash
+# Stub spctl for tests. Behavior is controlled by env vars set per-test:
+#   STUB_SPCTL_EXIT     exit code to return (default 0 = accepted)
+#   STUB_SPCTL_TEAMID   team ID reported in the origin= line
+
+if [[ -n "$STUB_SPCTL_EXIT" && "$STUB_SPCTL_EXIT" != "0" ]]; then
+	echo "rejected" >&2
+	exit "$STUB_SPCTL_EXIT"
+fi
+
+teamid="${STUB_SPCTL_TEAMID:-N67C7J5WQ9}"
+cat >&2 <<EOF
+${*}: accepted
+source=Notarized Developer ID
+origin=Developer ID Installer: GitGuardian Inc. ($teamid)
+EOF
+exit 0
