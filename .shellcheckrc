@@ -1,0 +1,2 @@
+# SC2329: false positive for functions invoked indirectly via `trap`
+disable=SC2329

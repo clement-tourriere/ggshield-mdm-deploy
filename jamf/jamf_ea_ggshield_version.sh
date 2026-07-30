@@ -1,4 +1,4 @@
-#!/bin/zsh --no-rcs
+#!/bin/bash
 # Jamf Pro Extension Attribute - ggshield Version
 #
 # Reports the installed ggshield version.
