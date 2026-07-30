@@ -1,4 +1,4 @@
-#!/bin/zsh --no-rcs
+#!/bin/bash
 # ggshield Audit Script for Kandji
 #
 # Checks if ggshield is installed, up to date, and properly signed.

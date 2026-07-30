@@ -1,4 +1,4 @@
-#!/bin/zsh --no-rcs
+#!/bin/bash
 # ggshield Install Script
 #
 # Downloads and installs the latest ggshield from GitHub releases.
