@@ -1,0 +1,11 @@
+#!/bin/bash
+# Stub stat for tests. Only supports the `-f "%Su" /dev/console` invocation
+# used to detect the console user. Behavior is controlled by:
+#   STUB_CONSOLE_USER   user to report (default "testuser"; set to "" to
+#                        simulate no logged-in user)
+
+if [[ "$1" == "-f" ]]; then
+	echo "${STUB_CONSOLE_USER-testuser}"
+	exit 0
+fi
+exit 1

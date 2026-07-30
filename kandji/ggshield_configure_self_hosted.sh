@@ -1,0 +1,1 @@
+../shared/ggshield_configure_self_hosted.sh

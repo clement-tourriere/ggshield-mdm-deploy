@@ -1,0 +1,17 @@
+#!/bin/bash
+# Stub sudo for tests: strips a leading `-u <user>` and execs the rest
+# directly (tests don't run as root, so real privilege dropping isn't
+# meaningful here - what matters is that the right command was built).
+# Behavior is controlled by:
+#   STUB_SUDO_EXIT   exit code to return instead of running the command
+
+if [[ -n "$STUB_SUDO_EXIT" && "$STUB_SUDO_EXIT" != "0" ]]; then
+	echo "sudo: stub forced failure" >&2
+	exit "$STUB_SUDO_EXIT"
+fi
+
+if [[ "$1" == "-u" ]]; then
+	shift 2
+fi
+
+exec "$@"
