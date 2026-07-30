@@ -38,6 +38,13 @@ EOF
 	[[ "$output" == *"INSTANCE_URL is not set"* ]]
 }
 
+@test "fails when INSTANCE_URL does not look like a URL" {
+	write_fixture_ggshield
+	INSTANCE_URL="gitguardian.example.com" run "$SCRIPT"
+	[ "$status" -eq 1 ]
+	[[ "$output" == *"does not look like a URL"* ]]
+}
+
 @test "fails when ggshield is not installed" {
 	INSTANCE_URL="$SELF_HOSTED_URL" run "$SCRIPT"
 	[ "$status" -eq 1 ]

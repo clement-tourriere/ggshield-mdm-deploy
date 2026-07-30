@@ -21,13 +21,14 @@ bats test/       # run the test suite
 dprint fmt       # format markdown files
 ```
 
-CI (`.github/workflows/ci.yml`) runs `hk check --all` and `bats test/` on every push and pull
-request.
+CI (`.github/workflows/ci.yml`) runs `hk check --all`, `dprint check`, and `bats test/` on every
+push and pull request.
 
 ## Tests
 
 Tests live in `test/*.bats` and stub out external commands (`curl`, `spctl`, `installer`,
-`codesign`, `uname`) via `test/stubs/`, so they don't touch the network or `/usr/local/bin`. Test
+`codesign`, `uname`, `stat`, `sudo`) via `test/stubs/`, so they don't touch the network or
+`/usr/local/bin`. Test
 coverage is scoped to the security-critical branches — Team ID verification, Gatekeeper checks,
 version comparison — rather than every possible code path.
 
