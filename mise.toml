@@ -4,6 +4,7 @@ shfmt = "latest"
 bats = "latest"
 hk = "latest"
 pkl = "latest"
+dprint = "latest"
 
 [env]
 HK_MISE = 1
