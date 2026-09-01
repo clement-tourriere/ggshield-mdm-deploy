@@ -8,7 +8,7 @@ Inspired by [Installomator](https://github.com/Installomator/Installomator).
 
 | Platform                      | Directory | Description                                         |
 | ----------------------------- | --------- | --------------------------------------------------- |
-| [iru](iru/) (formerly Kandji) | `iru/`    | Audit & remediation scripts for iru Custom Scripts  |
+| [Iru](iru/) (formerly Kandji) | `iru/`    | Audit & remediation scripts for Iru Custom Scripts  |
 | [Jamf Pro](jamf/)             | `jamf/`   | Install script and Extension Attribute for Jamf Pro |
 
 ## Structure
@@ -19,7 +19,7 @@ shared/
   ggshield_configure_eu.sh                # Points ggshield at GitGuardian's EU dashboard
   ggshield_configure_self_hosted.sh       # Points ggshield at a self-hosted instance
 iru/
-  ggshield_audit.sh                      # iru audit script
+  ggshield_audit.sh                      # Iru audit script
   ggshield_remediation.sh                # -> ../shared/ggshield_install.sh (symlink)
   ggshield_configure_eu.sh                # -> ../shared/ggshield_configure_eu.sh (symlink)
   ggshield_configure_self_hosted.sh       # -> ../shared/ggshield_configure_self_hosted.sh (symlink)
